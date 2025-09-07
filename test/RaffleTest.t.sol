@@ -5,14 +5,14 @@ import {Raffle} from "src/Raffle.sol";
 
 pragma solidity ^0.8.30;
 
-contract RaffleTest is Test{
+contract RaffleTest is Test {
     Raffle public raffle;
     DeployRaffle public deployer;
-    function setUp()external{
-        deployer=new DeployRaffle();
-        raffle=deployer.run();
-    }
-    function testDemo()public{
 
+    function setUp() external {
+        deployer = new DeployRaffle();
+        raffle = deployer.run();
     }
+
+    function testDemo() public {}
 }

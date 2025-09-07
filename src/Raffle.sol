@@ -20,7 +20,6 @@
 // internal & private view & pure functions
 // external & public view & pure functions
 
-
 //SPDX-License-Identifier: MIT
 
 pragma solidity ^0.8.30;
@@ -31,46 +30,46 @@ pragma solidity ^0.8.30;
  * @notice This is a sample Raffle contract
  * @dev Implements ChainLink VRFv2.5
  */
-
-contract Raffle{
+contract Raffle {
     /*Errors*/
 
     error NotEnoughEth();
-    
+
     address payable[] sPlayers;
     uint256 private sTimestamp;
     uint256 private immutable I_ENTRANCE_FEE;
     uint256 private immutable I_INTERVAL;
 
-    /**Events */
+    /**
+     * Events
+     */
     event RaffleEntered(address);
 
-    constructor(uint256 entranceFee,uint256 interval){
-        I_ENTRANCE_FEE=entranceFee;
+    constructor(uint256 entranceFee, uint256 interval) {
+        I_ENTRANCE_FEE = entranceFee;
 
         //@dev The duration of lottery in seconds
-        I_INTERVAL=interval; 
+        I_INTERVAL = interval;
 
-        sTimestamp=block.timestamp;
+        sTimestamp = block.timestamp;
     }
 
-
-    function enterRaffle()external payable{
+    function enterRaffle() external payable {
         // require(msg.value>=I_ENTRANCE_FEE, "Not Enough Eth");   //not gas efficient
-        if (msg.value< I_ENTRANCE_FEE){
+        if (msg.value < I_ENTRANCE_FEE) {
             revert NotEnoughEth();
         }
         sPlayers.push(payable(msg.sender));
         emit RaffleEntered(msg.sender);
-
     }
 
-    function pickWinner() view external{
-        if(block.timestamp-sTimestamp<I_INTERVAL){
+    function pickWinner() external view {
+        if (block.timestamp - sTimestamp < I_INTERVAL) {
             revert();
         }
     }
-    function getEntranceFee()public view returns(uint256){
+
+    function getEntranceFee() public view returns (uint256) {
         return I_ENTRANCE_FEE;
     }
 }
