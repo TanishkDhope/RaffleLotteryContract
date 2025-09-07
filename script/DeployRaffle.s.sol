@@ -8,7 +8,7 @@ contract DeployRaffle is Script{
     Raffle public raffle;
     function run()external returns(Raffle){
         vm.startBroadcast();
-        raffle=new Raffle(1);
+        raffle=new Raffle(1,1000);
         vm.stopBroadcast();
         return raffle;
     }
